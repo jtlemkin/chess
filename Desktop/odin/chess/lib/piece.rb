@@ -5,6 +5,14 @@ class Piece
 		@color = color
 	end
 
+	def white
+		nil
+	end
+
+	def black
+		nil
+	end
+
 	def valid_move?(x, y)
 		does_move?(x, y)
 	end
@@ -12,25 +20,23 @@ class Piece
 	def does_move?(x, y)
 		x != 0 || y != 0
 	end
-end
 
-class King < Piece
-	def initialize(color)
-		super(color)
-	end
-
-	def valid_move?(x, y)
-		super(x, y) && only_one_tile?(x, y)
-	end
-
-	def only_one_tile?(x, y)
-		x >= -1 && x <= 1 && y >= -1 && y <= 1
+	def to_s
+		if @color == :white
+			return white
+		elsif @color == :black
+			return black
+		end
 	end
 end
 
 class Rook < Piece
-	def initialize(color)
-		super(color)
+	def white
+		"\u2656"
+	end
+
+	def black
+		"\u265C"
 	end
 
 	def valid_move?(x, y)
@@ -43,8 +49,12 @@ class Rook < Piece
 end
 
 class Bishop < Piece
-	def initialize(color)
-		super(color)
+	def white
+		"\u2657"
+	end
+
+	def black
+		"\u265D"
 	end
 
 	def valid_move?(x, y)
@@ -57,8 +67,12 @@ class Bishop < Piece
 end
 
 class Queen < Piece
-	def initialize(color)
-		super(color)
+	def white
+		"\u2655"
+	end
+
+	def black
+		"\u265B"
 	end
 
 	def valid_move?(x, y)
@@ -75,8 +89,12 @@ class Queen < Piece
 end
 
 class Knight < Piece
-	def initialize(color)
-		super(color)
+	def white
+		"\u2658"
+	end
+
+	def black
+		"\u265E"
 	end
 
 	def valid_move?(x, y)
@@ -89,8 +107,12 @@ class Knight < Piece
 end
 
 class Pawn < Piece
-	def initialize(color)
-		super(color)
+	def white
+		"\u2659"
+	end
+
+	def black
+		"\u265F"
 	end
 
 	def valid_move?(x, y)
@@ -99,5 +121,23 @@ class Pawn < Piece
 
 	def forward?(x, y)
 		x == 1 && y == 0
+	end
+end
+
+class King < Piece
+	def white
+		"\u2654"
+	end
+
+	def black
+		"\u265A"
+	end
+
+	def valid_move?(x, y)
+		super(x, y) && only_one_tile?(x, y)
+	end
+
+	def only_one_tile?(x, y)
+		x >= -1 && x <= 1 && y >= -1 && y <= 1
 	end
 end
